@@ -1,0 +1,117 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# polygon-gz
+
+Polls is a simple API allowing consumers to view polls and vote in them.
+
+## Questions Collection [/questions]
+
+### List All Questions [GET]
+
++ Response 600 (application/json; charset=utf-8)
+    * Attributes(StartForecast)
+
++ Response 601 (application/json; charset=utf-8)
+    * Attributes(MessageAck)
+
++ Response 602 (application/json; charset=utf-8)
+    * Attributes(MessageError)
+    
++ Response 603 (application/json; charset=utf-8)
+    * Attributes(EndForecast)
+    
++ Response 604 (application/json; charset=utf-8)
+    * Attributes(GetSid)
+
++ Response 605 (application/json; charset=utf-8)
+    * Attributes(SndSid)
+    
++ Response 606 (application/json; charset=utf-8)
+    * Attributes(SndParams)
+    
++ Response 607 (application/json; charset=utf-8)
+    * Attributes(MessageError2)
+
++ Response 608 (application/json; charset=utf-8)
+    * Attributes(SndRes)
+
+            
+#Data Structures
+## EventType(enum[number])
+### Members
+- `0` - Провести расчет
+- `1` - Подтверждение получения сообщения
+- `2` - Сообщение об ошибках
+- `3` - Сообщение о завершении расчета
+- `4` - Запрос идентификатора сессии
+- `5` - Выдача идентификатора сессии
+- `6` - Передача параметров эксперимента
+- `7` - Сообщение о готовности результата
+
+
+## ErrorType(enum[number])
+### Members
+- `30` - Некорректные входные данные
+- `31` - Сетевой ресурс СИУ не доступен
+- `32` - Ошибка выполнения
+
+## StartForecast(object, fixed-type)
+### Properties
+* Type: 1 (EventType[number]) - Тип сообщения 
+* Time: 0 (number) - Время события UTC
+* NeUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - GUID натурного эксперимента из БД планирования
+* DocName: `example_v2.xml` (string) - Имя документа с исходными данными
+* DirSrcUID: `cbd27b2e-1597-4e2a-b392-bfaf2268b2af` (string) - GUID директории в СИУ с исходными данными
+* IOUID: `4b08b35f-908d-4637-b70b-731353021948` (string) - GUID ИО в СИУ с исходными данными
+* DirTrgUID: `d54e17be-25f1-4c84-93e3-5e9bb1d75b8b` (string) - GUID директории в СИУ для результата расчета
+* IONameTmpl: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - Шаблон имени ИО для результата расчетов
+
+
+## MessageAck(object, fixed-type)
+### Properties
+* Type: 2 (EventType[number]) -  Тип сообщения
+* Time: 0 (number) - Время события UTC
+* NeUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) -  GUID натурного эксперимента из БД планирования
+
+## MessageError(object, fixed-type)
+### Properties
+* Type: 1 (EventType[number]) -  Тип сообщения
+* Time: 0 (number) - Время события UTC
+* NeUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - GUID натурного эксперимента из БД планирования
+* Error: 0 (ErrorType[number]) - Код ошибки
+* ErrorMessage: `Failed to authorize SIU with message: host not available` (string) - Описание ошибки строка
+
+## EndForecast(object, fixed-type)
+### Properties
+* Type: 1 (EventType[number]) -  Тип сообщения
+* Time: 0 (number) - Время события UTC
+* NeUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - GUID натурного эксперимента из БД планирования
+* docName: `file.name` (string) - Имя документа файла с результатами расчета
+* IOTrgUID: `cbd27b2e-1597-4e2a-b392-bfaf2268b2af` (string) - GUID ИО в СИУ с результатами расчета
+
+## GetSid(object, fixed-type)
+### Properties
+* Type: 1 (EventType[number]) -  Тип сообщения
+* Time: 0 (number) - Время события UTC
+
+## SndSid(object, fixed-type)
+### Properties
+* Type: 1 (EventType[number]) -  Тип сообщения
+* Time: 0 (number) - Время события UTC
+* SUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - GUID идентификатор сессии
+
+## SndParams(object, fixed-type)
+### Properties
+* Type: 1 (EventType[number]) -  Тип сообщения
+* Time: 0 (number) - Время события UTC
+* SUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - GUID идентификатор сессии
+* NeUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - GUID натурного эксперимента из БД планирования
+
+## MessageError2(MessageError, fixed-type)
+### Properties
+* SUID: `4f62c948-1a86-11ea-9cd2-b271382053e7` (string) - GUID идентификатор сессии
+
+## SndRes(SndSid, fixed-type)
+### Properties
+* URL: `http://127.0.0.1/link` (string) - HTTP ссылка на результат
