@@ -1,0 +1,11 @@
+/cpptypes
+  <600 ::StartForecast
+  <601 ::MessageAck
+  <602 ::MessageError
+  <603 ::EndForecast
+  <604 ::GetSid
+  <605 ::SndSid
+  <606 ::SndParams
+  <607 ::MessageError2
+  <608 ::SndRes
+

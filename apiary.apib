@@ -3,40 +3,41 @@ HOST: https://polls.apiblueprint.org/
 
 # polygon-gz
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Poligon gz websocket api
+# Group Методы
 
-## Questions Collection [/cpptypes]
+## CPPTYPES [/cpptypes]
 
-### List All Questions [GET]
+### Get [GET]
 
-+ Response 600 (application/json; charset=utf-8)
++ Response 600 (application/json)
     * Attributes(StartForecast)
 
-+ Response 601 (application/json; charset=utf-8)
++ Response 601 (application/json)
     * Attributes(MessageAck)
 
-+ Response 602 (application/json; charset=utf-8)
++ Response 602 (application/json)
     * Attributes(MessageError)
     
-+ Response 603 (application/json; charset=utf-8)
++ Response 603 (application/json)
     * Attributes(EndForecast)
     
-+ Response 604 (application/json; charset=utf-8)
++ Response 604 (application/json)
     * Attributes(GetSid)
 
-+ Response 605 (application/json; charset=utf-8)
++ Response 605 (application/json)
     * Attributes(SndSid)
     
-+ Response 606 (application/json; charset=utf-8)
++ Response 606 (application/json)
     * Attributes(SndParams)
     
-+ Response 607 (application/json; charset=utf-8)
++ Response 607 (application/json)
     * Attributes(MessageError2)
 
-+ Response 608 (application/json; charset=utf-8)
++ Response 608 (application/json)
     * Attributes(SndRes)
 
-            
+
 #Data Structures
 ## EventType(enum[number])
 ### Members
@@ -115,3 +116,4 @@ Polls is a simple API allowing consumers to view polls and vote in them.
 ## SndRes(SndSid, fixed-type)
 ### Properties
 * URL: `http://127.0.0.1/link` (string) - HTTP ссылка на результат
+
